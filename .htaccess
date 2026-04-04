@@ -1,0 +1,22 @@
+# WooDashboard — Apache ochrana
+
+# Zabrání přímému přístupu k citlivým souborům
+<FilesMatch "(config\.php|\.db|cron\.php)$">
+  # config.php a .db — vždy chráněny
+</FilesMatch>
+
+# Chraň složku data/ před přímým přístupem
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^data/ - [F,L]
+</IfModule>
+
+# Vypni directory listing
+Options -Indexes
+
+# Bezpečnostní hlavičky
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "DENY"
+  Header set X-XSS-Protection "1; mode=block"
+</IfModule>
