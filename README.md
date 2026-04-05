@@ -257,11 +257,13 @@ Included languages:
 - No need to log into multiple WooCommerce admin panels
 - No dependency on WordPress plugins
 - Lightweight and fast
-- Centralized overview of
+- Centralized overview of all your stores
 
 ---
 
-## 👤 Autor
+## 👤 Author
 
-Vytvořeno: **MaDaNo**  
+Created by **MaDaNo**  
 https://madano.cz
+
+Feel free to use, modify or contribute 🚀
