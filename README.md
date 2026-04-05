@@ -114,7 +114,7 @@ Aplikace obsahuje tyto jazyky:
 ## ⚠️ Poznámky
 
 - první načtení může trvat déle
-- je nutné mít správně n
+- je nutné mít správně nastavený cron
 
 ---
 
@@ -132,28 +132,97 @@ Lightweight PHP application for aggregating and monitoring orders across multipl
   - total revenue
   - number of orders
   - per-store statistics
-- Supports **multiple currencies**
-- Detailed order view
-- Filtering by order status
+- Supports **multiple currencies** (automatically separated)
+- Provides **detailed order view** (products, quantities, etc.)
+- Allows filtering orders by **status**
+
+👉 No more logging into multiple admin panels or checking emails manually.
 
 ---
 
-## 🔄 Cron
+## 🔥 Key Features
+
+- 🧩 Supports **hundreds of WooCommerce stores**
+- ⚡ Incremental updates (fast after first sync)
+- 🔄 Automatic status updates (last 30 days)
+- 💾 No database required
+- 🖥️ Simple web interface with administration
+- 🧠 Smart caching with manual refresh option
+- 🌍 Multilingual support (easy to extend)
+
+---
+
+## 🧱 Requirements
+
+- PHP **7.4 or higher**
+- WooCommerce REST API access (consumer key & secret)
+- Web server (Apache/Nginx)
+
+---
+
+## ⚙️ How it works
+
+### 1. Initial sync
+
+- Downloads all orders from all configured stores
+- May take longer depending on volume
+
+### 2. Incremental updates
+
+- Fetches only new orders
+- Checks status changes for last 30 days
+
+---
+
+## 🔄 Cron job
 
 ```bash
 https://your-domain.tld/cron.php?token=YOUR_SECRET_TOKEN
 ```
 
+👉 Recommended: run every hour
+
 ---
 
 ## ⚙️ Configuration
 
-- Admin password in `config.php`
-- Stores are added via web interface
+Basic setup is done in `config.php`:
+
+- Set admin password
+- Set cron token
+- Configure cache refresh interval
+
+👉 WooCommerce stores are NOT configured in files.
+
+After logging into the web interface, you can:
+- Add stores via a simple form (API URL, keys)
+- Manage all connected stores in one place
 
 ---
 
-## 📄 License
+## 🖥️ Usage
 
-MIT License
+- Open the application in browser
+- Log in
+- View aggregated data across all stores
+- Filter orders by status
+- Click any order to see details
 
+---
+
+## 🌍 Languages
+
+Included languages:
+
+- cs, de, el, en, es, fr, hu, it, nl, pl, ro, ru, sk
+
+👉 You can easily add new language by translating `en.php`.
+
+---
+
+## 💡 Why use this?
+
+- No need to log into multiple WooCommerce admin panels
+- No dependency on WordPress plugins
+- Lightweight and fast
+- Centralized overview of
