@@ -272,4 +272,7 @@ Feel free to use, modify or contribute 🚀
 
 ## 📄 License
 
-This project is free to use, but selling it or redistributing it as a paid product is not allowed.
+This project is free to use for personal and internal business purposes.  
+Selling or redistributing it as a paid product is not allowed.
+
+For commercial licensing: inzerce@gmail.com
