@@ -265,7 +265,11 @@ Included languages:
 
 ## 👤 Author
 
-Created by **MaDaNo**  
+Created by **Fany VanDaal** & **MaDaNo**  
 https://madano.cz
 
 Feel free to use, modify or contribute 🚀
+
+## 📄 License
+
+This project is free to use, but selling it or redistributing it as a paid product is not allowed.
