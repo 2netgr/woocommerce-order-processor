@@ -258,3 +258,10 @@ Included languages:
 - No dependency on WordPress plugins
 - Lightweight and fast
 - Centralized overview of
+
+---
+
+## 👤 Autor
+
+Vytvořeno: **MaDaNo**  
+https://madano.cz
