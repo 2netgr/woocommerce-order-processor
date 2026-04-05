@@ -159,4 +159,14 @@ return array(
     'rel_minutes'           => 'před %d min',
     'rel_hours'             => 'před %d h',
     'rel_days'              => 'před %d dny',
+
+    // ── Update checker ────────────────────────────────────────
+    'update_available' => 'K dispozici je nová verze %s!',
+    'update_current'   => 'Aktuálně běží verze %s.',
+    'update_link'      => 'Zobrazit aktualizaci na GitHubu →',
+    'open_in_shop' => 'Otevřít v shopu',
+
+    // ── Brute-force ochrana ────────────────────────────────────
+    'login_locked'         => 'Příliš mnoho neúspěšných pokusů. Zkuste to znovu za %d minut.',
+    'login_attempts_left'  => 'Zbývá %d pokus(ů).',
 );

@@ -137,4 +137,14 @@ return array(
     'rel_minutes'           => '%d min fa',
     'rel_hours'             => '%d ore fa',
     'rel_days'              => '%d giorni fa',
+
+    // ── Update checker ────────────────────────────────────────
+    'update_available' => 'Nuova versione %s disponibile!',
+    'update_current'   => 'Versione attuale: %s.',
+    'update_link'      => 'Vedi aggiornamento su GitHub →',
+    'open_in_shop' => 'Apri nel negozio',
+
+    // ── Brute-force ochrana ────────────────────────────────────
+    'login_locked'         => 'Troppi tentativi falliti. Riprova tra %d minuti.',
+    'login_attempts_left'  => '%d tentativo(i) rimanente(i).',
 );

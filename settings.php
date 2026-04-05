@@ -5,6 +5,7 @@ require_once __DIR__ . '/src/Auth.php';
 require_once __DIR__ . '/src/Helpers.php';
 require_once __DIR__ . '/src/Database.php';
 require_once __DIR__ . '/src/WooApi.php';
+require_once __DIR__ . '/src/UpdateChecker.php';
 
 Auth::requireAuth();
 
@@ -57,6 +58,7 @@ if (Helpers::isPost()) {
     }
 }
 
+$updateAvailable = UpdateChecker::check();
 $stores      = $db->getStores();
 $cronLog     = $db->getCronLog(30);
 $editId      = (int)Helpers::get('edit');
@@ -76,6 +78,17 @@ require __DIR__ . '/views/layout_top.php';
 
 <?php if ($flash): ?>
 <div class="alert alert--<?= $flashType === 'error' ? 'error' : 'ok' ?>"><?= Helpers::e($flash) ?></div>
+<?php endif; ?>
+
+<?php if (!empty($updateAvailable)): ?>
+<div class="update-banner">
+  <span class="update-banner-icon">🆕</span>
+  <div class="update-banner-text">
+    <strong><?= t('update_available', Helpers::e($updateAvailable['version'])) ?></strong>
+    <?= t('update_current', APP_VERSION) ?>
+    · <a href="<?= Helpers::e($updateAvailable['url']) ?>" target="_blank" rel="noopener"><?= t('update_link') ?></a>
+  </div>
+</div>
 <?php endif; ?>
 
 <div class="tabs">

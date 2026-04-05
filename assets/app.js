@@ -1,3 +1,34 @@
+// ── Hamburger menu ─────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+  const hamburger = document.getElementById('nav-hamburger');
+  const mobileMenu = document.getElementById('nav-mobile-menu');
+  const refreshMobile = document.getElementById('btn-refresh-all-mobile');
+
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', function() {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+
+    // Zavři při kliknutí na odkaz v menu
+    mobileMenu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
+  }
+
+  // Obnovit tlačítko v mobile menu
+  if (refreshMobile) {
+    refreshMobile.addEventListener('click', function() {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      refreshAll();
+    });
+  }
+});
+
 // ── Lang dropdown — zavři při kliknutí mimo ────────────────────
 document.addEventListener('click', function(e) {
   if (!e.target.closest('.lang-dropdown')) {
@@ -100,7 +131,7 @@ function formatPrice(total, currency) {
 }
 
 // ── Detail objednávky ──────────────────────────────────────────
-function renderDetail(container, data) {
+function renderDetail(container, data, storeUrl) {
   if (data.error) {
     container.innerHTML = `<p style="color:#ef4444;font-size:.82rem;padding:12px 0">Chyba: ${data.error}</p>`;
     return;
@@ -140,6 +171,16 @@ function renderDetail(container, data) {
     html += `<div class="detail-note">📝 ${I18N.order_detail_note}: ${data.customer_note}</div>`;
   }
 
+  // Tlačítko "Otevřít v shopu"
+  if (storeUrl && data.id) {
+    const adminUrl = storeUrl + '/wp-admin/post.php?post=' + data.id + '&action=edit';
+    html += `<div class="detail-actions">
+      <a href="${adminUrl}" target="_blank" rel="noopener" class="btn-open-in-shop">
+        🔗 ${I18N.open_in_shop || 'Otevřít v shopu'}
+      </a>
+    </div>`;
+  }
+
   container.innerHTML = html;
 }
 
@@ -167,9 +208,10 @@ function attachOrderRow(row) {
     inner._loaded = true;
 
     try {
+      const storeUrl = row.dataset.url || '';
       const res  = await fetch(`api.php?action=order_detail&store_id=${storeId}&order_id=${orderId}`);
       const data = await res.json();
-      renderDetail(inner, data);
+      renderDetail(inner, data, storeUrl);
     } catch {
       inner.innerHTML = `<p style="color:#ef4444;font-size:.82rem;padding:12px 0">${I18N.order_error}</p>`;
     }

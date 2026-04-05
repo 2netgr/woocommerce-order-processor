@@ -1,6 +1,8 @@
-# 🚀 WooCommerce Order Processor
+![Dashboard](/docs/logo-woodashboard-500.png)
 
-Lehká PHP aplikace pro agregaci a sledování objednávek z více WooCommerce shopů na jednom místě.
+# 🚀 WooDashboard
+
+Přehled všech WooCommerce objednávek na jednom místě.
 
 ## 📸 Ukázka
 
@@ -134,9 +136,9 @@ Aplikace obsahuje tyto jazyky:
 
 ---
 
-# 🇬🇧 English version
+# 🇬🇧 WooDashboard
 
-Lightweight PHP application for aggregating and monitoring orders across multiple WooCommerce stores — all in one place.
+All your WooCommerce orders in one place.
 
 ## 📸 Screenshots
 

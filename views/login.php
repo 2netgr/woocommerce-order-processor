@@ -10,12 +10,20 @@
 <div class="login-wrap">
   <div class="login-card">
     <div class="login-logo">
-      <span class="login-icon">🛒</span>
-      <span class="login-name">Woo<strong>Dashboard</strong></span>
+      <img src="assets/img/logo-woodashboard.png" alt="WooDashboard" class="login-logo-img">
     </div>
     <p class="login-sub"><?= t('login_subtitle') ?></p>
-    <?php if (!empty($loginError)): ?>
-    <div class="alert alert--error"><?= t('login_error') ?></div>
+    <?php if (!empty($loginLocked)): ?>
+    <div class="alert alert--error">
+      <?= t('login_locked', (int)ceil($loginLocked / 60)) ?>
+    </div>
+    <?php elseif (!empty($loginError)): ?>
+    <div class="alert alert--error">
+      <?= t('login_error') ?>
+      <?php if (!empty($loginAttempts) && $loginAttempts < 5): ?>
+        <?= t('login_attempts_left', (int)$loginAttempts) ?>
+      <?php endif; ?>
+    </div>
     <?php endif; ?>
     <form method="post" class="login-form">
       <input type="hidden" name="_csrf" value="<?= Auth::csrfToken() ?>">
@@ -34,7 +42,7 @@
         </button>
         <div class="lang-menu">
           <?php foreach (Lang::available() as $lng): ?>
-          <a href="?setlang=<?= $lng ?>" class="lang-option <?= Lang::get() === $lng ? 'lang-option--active' : '' ?>">
+          <a href="?setlang=<?= htmlspecialchars($lng, ENT_QUOTES, 'UTF-8') ?>" class="lang-option <?= Lang::get() === $lng ? 'lang-option--active' : '' ?>">
             <?= Lang::flag($lng) ?>
             <span><?= Lang::fullLabel($lng) ?></span>
           </a>

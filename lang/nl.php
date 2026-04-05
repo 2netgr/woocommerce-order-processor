@@ -137,4 +137,14 @@ return array(
     'rel_minutes'           => '%d min geleden',
     'rel_hours'             => '%d uur geleden',
     'rel_days'              => '%d dagen geleden',
+
+    // ── Update checker ────────────────────────────────────────
+    'update_available' => 'Nieuwe versie %s beschikbaar!',
+    'update_current'   => 'Huidige versie: %s.',
+    'update_link'      => 'Bekijk update op GitHub →',
+    'open_in_shop' => 'Openen in winkel',
+
+    // ── Brute-force ochrana ────────────────────────────────────
+    'login_locked'         => 'Te veel mislukte pogingen. Probeer het over %d minuten opnieuw.',
+    'login_attempts_left'  => 'Nog %d poging(en) over.',
 );

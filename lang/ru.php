@@ -137,4 +137,14 @@ return array(
     'rel_minutes'           => '%d мин назад',
     'rel_hours'             => '%d ч назад',
     'rel_days'              => '%d дн назад',
+
+    // ── Update checker ────────────────────────────────────────
+    'update_available' => 'Доступна новая версия %s!',
+    'update_current'   => 'Текущая версия: %s.',
+    'update_link'      => 'Посмотреть обновление на GitHub →',
+    'open_in_shop' => 'Открыть в магазине',
+
+    // ── Brute-force ochrana ────────────────────────────────────
+    'login_locked'         => 'Слишком много неудачных попыток. Повторите через %d минут.',
+    'login_attempts_left'  => 'Осталось %d попыт(ок).',
 );

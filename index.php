@@ -7,6 +7,7 @@ require_once __DIR__ . '/src/Auth.php';
 require_once __DIR__ . '/src/Helpers.php';
 require_once __DIR__ . '/src/Database.php';
 require_once __DIR__ . '/src/WooApi.php';
+require_once __DIR__ . '/src/UpdateChecker.php';
 
 Auth::init();
 
@@ -19,17 +20,20 @@ if (isset($_GET['setlang'])) {
 if (isset($_GET['logout'])) { Auth::logout(); Helpers::redirect('index.php'); }
 
 if (Helpers::isPost() && isset($_POST['password'])) {
-    if (Auth::login(Helpers::post('password'))) {
+    if (Auth::isLockedOut()) {
+        $loginLocked = Auth::lockoutRemainingSeconds();
+    } elseif (Auth::login(Helpers::post('password'))) {
         Helpers::redirect('index.php');
     } else {
-        $loginError = true;
+        $loginError    = true;
+        $loginAttempts = Auth::loginAttemptsLeft();
     }
 }
 
 if (!Auth::isLoggedIn()) { require __DIR__ . '/views/login.php'; exit; }
 
 // ── Renderovací helper ─────────────────────────────────────────
-function renderOrderRow($o, $storeId, $color)
+function renderOrderRow($o, $storeId, $color, $storeUrl = '')
 {
     $statusArr   = Helpers::statusLabel(isset($o['status']) ? $o['status'] : '');
     $statusText  = $statusArr[0];
@@ -44,7 +48,7 @@ function renderOrderRow($o, $storeId, $color)
     $orderId     = (int)(isset($o['order_id'])           ? $o['order_id']      : 0);
     $status      = Helpers::e(isset($o['status'])        ? $o['status']        : '');
     ?>
-    <tr class="order-row" data-store="<?= $storeId ?>" data-id="<?= $orderId ?>" data-status="<?= $status ?>">
+    <tr class="order-row" data-store="<?= $storeId ?>" data-id="<?= $orderId ?>" data-status="<?= $status ?>" data-url="<?= Helpers::e(rtrim($storeUrl, '/')) ?>">
       <td><span class="order-num">#<?= $num ?></span></td>
       <td><span class="order-date"><?= $date ?></span></td>
       <td><span class="order-customer"><?= $customer ?></span></td>
@@ -66,6 +70,9 @@ function renderOrderRow($o, $storeId, $color)
     </tr>
     <?php
 }
+
+// ── Kontrola aktualizace (nenápadně, z cache) ────────────────
+$updateAvailable = UpdateChecker::check();
 
 // ── Data ───────────────────────────────────────────────────────
 $db     = Database::get();
@@ -136,6 +143,17 @@ require __DIR__ . '/views/layout_top.php';
 <div class="page-header">
   <h1 class="page-title"><?= t('dash_title') ?></h1>
 </div>
+
+<?php if (!empty($updateAvailable)): ?>
+<div class="update-banner">
+  <span class="update-banner-icon">🆕</span>
+  <div class="update-banner-text">
+    <strong><?= t('update_available', Helpers::e($updateAvailable['version'])) ?></strong>
+    <?= t('update_current', APP_VERSION) ?>
+    · <a href="<?= Helpers::e($updateAvailable['url']) ?>" target="_blank" rel="noopener"><?= t('update_link') ?></a>
+  </div>
+</div>
+<?php endif; ?>
 
 <!-- Stats řádek 1 -->
 <div class="stats-row stats-row--sm">
@@ -272,11 +290,11 @@ require __DIR__ . '/views/layout_top.php';
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($visible as $o): renderOrderRow($o, $storeId, $color); endforeach; ?>
+        <?php foreach ($visible as $o): renderOrderRow($o, $storeId, $color, $store['url']); endforeach; ?>
       </tbody>
       <?php if ($hasMore): ?>
       <tbody class="hidden-orders" id="hidden-<?= $storeId ?>" style="display:none">
-        <?php foreach ($hidden as $o): renderOrderRow($o, $storeId, $color); endforeach; ?>
+        <?php foreach ($hidden as $o): renderOrderRow($o, $storeId, $color, $store['url']); endforeach; ?>
       </tbody>
       <?php endif; ?>
     </table>
@@ -321,6 +339,7 @@ const I18N = {
   toast_refreshed       : <?= json_encode(t('toast_refreshed')) ?>,
   toast_testing         : <?= json_encode(t('toast_testing')) ?>,
   toast_net_error       : <?= json_encode(t('toast_net_error')) ?>,
+  open_in_shop          : <?= json_encode(t('open_in_shop')) ?>,
 };
 </script>
 <?php require __DIR__ . '/views/layout_bottom.php'; ?>

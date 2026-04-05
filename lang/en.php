@@ -159,4 +159,14 @@ return array(
     'rel_minutes'           => '%d min ago',
     'rel_hours'             => '%d h ago',
     'rel_days'              => '%d days ago',
+
+    // ── Update checker ────────────────────────────────────────
+    'update_available' => 'New version %s is available!',
+    'update_current'   => 'You are running version %s.',
+    'update_link'      => 'View update on GitHub →',
+    'open_in_shop' => 'Open in shop',
+
+    // ── Brute-force ochrana ────────────────────────────────────
+    'login_locked'         => 'Too many failed attempts. Try again in %d minutes.',
+    'login_attempts_left'  => '%d attempt(s) remaining.',
 );

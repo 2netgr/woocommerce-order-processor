@@ -137,4 +137,14 @@ return array(
     'rel_minutes'           => 'acum %d min',
     'rel_hours'             => 'acum %d ore',
     'rel_days'              => 'acum %d zile',
+
+    // ── Update checker ────────────────────────────────────────
+    'update_available' => 'Versiunea nouă %s este disponibilă!',
+    'update_current'   => 'Versiunea curentă: %s.',
+    'update_link'      => 'Vezi actualizarea pe GitHub →',
+    'open_in_shop' => 'Deschide în magazin',
+
+    // ── Brute-force ochrana ────────────────────────────────────
+    'login_locked'         => 'Prea multe încercări eșuate. Încercați din nou în %d minute.',
+    'login_attempts_left'  => 'Au mai rămas %d încercare(i).',
 );

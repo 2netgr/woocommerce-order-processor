@@ -137,4 +137,14 @@ return array(
     'rel_minutes'           => '%d min temu',
     'rel_hours'             => '%d godz. temu',
     'rel_days'              => '%d dni temu',
+
+    // ── Update checker ────────────────────────────────────────
+    'update_available' => 'Dostępna jest nowa wersja %s!',
+    'update_current'   => 'Aktualna wersja to %s.',
+    'update_link'      => 'Zobacz aktualizację na GitHubie →',
+    'open_in_shop' => 'Otwórz w sklepie',
+
+    // ── Brute-force ochrana ────────────────────────────────────
+    'login_locked'         => 'Zbyt wiele nieudanych prób. Spróbuj ponownie za %d minut.',
+    'login_attempts_left'  => 'Pozostało %d prób(a).',
 );

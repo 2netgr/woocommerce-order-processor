@@ -137,4 +137,14 @@ return array(
     'rel_minutes'           => '%d perce',
     'rel_hours'             => '%d órája',
     'rel_days'              => '%d napja',
+
+    // ── Update checker ────────────────────────────────────────
+    'update_available' => 'Új verzió érhető el: %s!',
+    'update_current'   => 'Jelenlegi verzió: %s.',
+    'update_link'      => 'Frissítés megtekintése a GitHubon →',
+    'open_in_shop' => 'Megnyitás az áruházban',
+
+    // ── Brute-force ochrana ────────────────────────────────────
+    'login_locked'         => 'Túl sok sikertelen kísérlet. Próbálja újra %d perc múlva.',
+    'login_attempts_left'  => 'Még %d kísérlet maradt.',
 );

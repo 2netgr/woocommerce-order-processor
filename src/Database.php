@@ -206,15 +206,15 @@ class Database
             $placeholders = implode(',', array_fill(0, count($visibleStatuses), '?'));
             $st = $this->pdo->prepare(
                 "SELECT * FROM order_cache WHERE store_id = ? AND status IN ($placeholders)
-                 ORDER BY date_created DESC LIMIT ?"
+                 ORDER BY date_created DESC LIMIT " . (int)$limit
             );
-            $params = array_merge(array($storeId), $visibleStatuses, array($limit));
+            $params = array_merge(array($storeId), $visibleStatuses);
             $st->execute($params);
         } else {
             $st = $this->pdo->prepare(
-                "SELECT * FROM order_cache WHERE store_id = ? ORDER BY date_created DESC LIMIT ?"
+                "SELECT * FROM order_cache WHERE store_id = ? ORDER BY date_created DESC LIMIT " . (int)$limit
             );
-            $st->execute(array($storeId, $limit));
+            $st->execute(array($storeId));
         }
         return $st->fetchAll();
     }
@@ -323,6 +323,7 @@ class Database
 
     public function getCronLog($limit = 20)
     {
+        $limit = (int)$limit;
         return $this->pdo->query(
             "SELECT l.*, s.name as store_name FROM cron_log l
              LEFT JOIN stores s ON s.id = l.store_id

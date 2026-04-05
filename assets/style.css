@@ -423,9 +423,17 @@ code {
 
 
 /* ── Language switcher ────────────────────────────────────── */
+.nav-logo-img {
+  height: 32px; width: auto;
+  display: block;
+}
 .nav-version {
   font-size: .65rem; color: var(--muted); font-family: 'DM Mono', monospace;
   margin-left: 4px; align-self: flex-end; margin-bottom: 2px;
+}
+.login-logo-img {
+  height: 32px; width: auto;
+  display: block; margin: 0 auto 6px;
 }
 .lang-dropdown {
   position: relative;
@@ -497,6 +505,91 @@ code {
   background: var(--accent-l); border-color: var(--accent); color: var(--accent);
 }
 
+
+/* ── Hamburger & mobile nav ───────────────────────────────── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column; justify-content: center; align-items: center;
+  gap: 5px; width: 38px; height: 38px;
+  background: none; border: 1px solid var(--border);
+  border-radius: 8px; cursor: pointer; padding: 6px;
+  margin-left: auto;
+}
+.nav-hamburger span {
+  display: block; width: 18px; height: 2px;
+  background: var(--text); border-radius: 2px;
+  transition: transform .25s, opacity .25s;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.nav-mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 8px 0 12px;
+}
+.nav-mobile-menu.open { display: flex; }
+
+.nav-mobile-link {
+  display: block; padding: 12px 20px;
+  font-size: .9rem; font-weight: 600; color: var(--text);
+  text-decoration: none; border: none; background: none;
+  font-family: inherit; text-align: left; cursor: pointer;
+  transition: background .12s;
+}
+.nav-mobile-link:hover { background: var(--surface2); text-decoration: none; }
+.nav-mobile-link--active { color: var(--accent); }
+.nav-mobile-link--muted { color: var(--muted); font-weight: 400; }
+
+.nav-mobile-divider { height: 1px; background: var(--border); margin: 6px 0; }
+
+.nav-mobile-langs {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  padding: 8px 20px;
+}
+.nav-mobile-lang {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: 20px;
+  border: 1px solid var(--border); background: var(--surface2);
+  font-size: .8rem; font-weight: 600; color: var(--text);
+  text-decoration: none; transition: all .15s;
+}
+.nav-mobile-lang:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+.nav-mobile-lang--active { background: var(--accent-l); border-color: #c7c2f8; color: var(--accent); }
+
+
+/* ── Detail actions ───────────────────────────────────────── */
+.detail-actions {
+  margin-top: 14px; display: flex; gap: 8px;
+}
+.btn-open-in-shop {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 14px; border-radius: 8px;
+  background: var(--surface); border: 1.5px solid var(--border);
+  color: var(--text); font-size: .82rem; font-weight: 700;
+  text-decoration: none; font-family: inherit;
+  transition: border-color .15s, background .15s, color .15s;
+}
+.btn-open-in-shop:hover {
+  border-color: var(--accent); color: var(--accent);
+  background: var(--accent-l); text-decoration: none;
+}
+
+/* ── Update checker banner ────────────────────────────────── */
+.update-banner {
+  display: flex; align-items: center; gap: 12px;
+  background: #fffbeb; border: 1px solid #fde68a;
+  border-radius: var(--r); padding: 12px 18px;
+  margin-bottom: 20px; font-size: .875rem;
+}
+.update-banner-icon { font-size: 1.2rem; flex-shrink: 0; }
+.update-banner-text { flex: 1; }
+.update-banner-text strong { color: #92400e; }
+.update-banner-text a { color: #92400e; font-weight: 700; }
+
 /* ── Responsive ───────────────────────────────────────────── */
 @media (max-width: 900px) {
   .stats-row { grid-template-columns: repeat(2, 1fr); }
@@ -505,6 +598,10 @@ code {
 }
 
 @media (max-width: 640px) {
+  .nav-actions--desktop { display: none; }
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+
   .nav-inner { padding: 0 16px; }
   .container { padding: 20px 14px 40px; }
   .card { padding: 20px 18px; }
