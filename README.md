@@ -9,13 +9,13 @@ Lehká PHP aplikace pro agregaci a sledování objednávek z více WooCommerce s
 ### Dashboard
 ![Dashboard](/docs/dashboard.png)
 
-### Orders & Detail
+### Objednávky & Detail
 ![Orders](/docs/orders.png)
 
-### Store Management
+### Správa shopů
 ![Settings](/docs/settings.png)
 
-### Add new store
+### Přidání nového shopu
 ![Add store](/docs/add-store.png)
 
 ---
@@ -137,6 +137,22 @@ Aplikace obsahuje tyto jazyky:
 # 🇬🇧 English version
 
 Lightweight PHP application for aggregating and monitoring orders across multiple WooCommerce stores — all in one place.
+
+## 📸 Screenshots
+
+> Complete overview of all orders across WooCommerce shops
+
+### Dashboard
+![Dashboard](/docs/dashboard.png)
+
+### Orders & Detail
+![Orders](/docs/orders.png)
+
+### Store Management
+![Settings](/docs/settings.png)
+
+### Add new store
+![Add store](/docs/add-store.png)
 
 ---
 
