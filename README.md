@@ -2,6 +2,22 @@
 
 Lehká PHP aplikace pro agregaci a sledování objednávek z více WooCommerce shopů na jednom místě.
 
+## 📸 Ukázka
+
+> Kompletní přehled všech objednávek napříč WooCommerce shopy
+
+### Dashboard
+![Dashboard](/docs/dashboard.png)
+
+### Orders & Detail
+![Orders](/docs/orders.png)
+
+### Store Management
+![Settings](/docs/settings.png)
+
+### Add new store
+![Add store](/docs/add-store.png)
+
 ---
 
 ## ⚡ Co to umí
