@@ -99,6 +99,9 @@ The plugin should keep its own tables rather than forcing everything into `wp_op
 
 Recommended tables:
 
+In the examples below, `wdp` means **WooDashboard Plugin**.  
+If you prefer, you can rename the prefix to something more explicit such as `woodashboard`.
+
 ### `wp_wdp_stores`
 
 One row per connected store:
@@ -233,7 +236,8 @@ Use:
 - `wp_schedule_event()` for recurring sync
 - optional Action Scheduler if you expect heavy workloads
 
-For larger installations, **Action Scheduler** is the better choice because it handles queued background work more reliably than plain WP-Cron.
+For larger installations, **Action Scheduler** is the better choice because it handles queued background work more reliably than plain WP-Cron.  
+If WooCommerce is active on the central site, Action Scheduler is already available there; otherwise you should include it deliberately as a plugin dependency before designing the sync flow around it.
 
 ### HTTP layer
 
@@ -252,7 +256,7 @@ Use custom tables instead of post types for orders and snapshots because:
 
 Protect secrets carefully:
 
-- encrypt API secrets at rest if possible
+- if you encrypt stored API secrets, use a real crypto library such as `sodium_crypto_secretbox()` and keep the encryption key outside the database and repository, preferably in an environment variable or external secrets manager
 - mask secrets in the UI
 - never expose remote credentials in AJAX or REST responses
 - sanitize all store URLs and status arrays before saving
