@@ -136,6 +136,17 @@ Aplikace obsahuje tyto jazyky:
 
 ---
 
+## 🧩 WordPress varianta
+
+Pokud chceš stejný koncept provozovat přímo v běžné WordPress instalaci, mrkni na návrh architektury v [`docs/wordpress-origin-installation.md`](docs/wordpress-origin-installation.md).
+
+Najdeš tam:
+- stručné vysvětlení, jak funguje tato standalone verze
+- mapování standalone částí na WordPress plugin
+- návrh tabulek, cronů, admin UI a REST synchronizace pro více shopů
+
+---
+
 # 🇬🇧 WooDashboard
 
 All your WooCommerce orders in one place.
@@ -260,6 +271,17 @@ Included languages:
 - No dependency on WordPress plugins
 - Lightweight and fast
 - Centralized overview of all your stores
+
+---
+
+## 🧩 WordPress variant
+
+If you want to run the same concept inside a standard WordPress installation, see the architecture proposal in [`docs/wordpress-origin-installation.md`](docs/wordpress-origin-installation.md).
+
+It includes:
+- a concise explanation of how the current standalone app works
+- a mapping from the standalone app to a WordPress plugin architecture
+- a suggested data model, cron flow, admin UI, and sync design for multiple stores
 
 ---
 
