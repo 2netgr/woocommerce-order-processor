@@ -1,9 +1,9 @@
 ---
-name: keep-cache-warm
-description: "Pings this session periodically to keep its large prompt cache warm, avoiding an expensive cache rewrite when you come back later. Invoke manually with /keep-cache-warm when the current session has a large (>200K token) context you plan to resume within the next few hours and are about to leave idle. Never invoke this automatically or proactively — it must be an explicit user request."
+name: warmcache
+description: "Pings this session periodically to keep its large prompt cache warm, avoiding an expensive cache rewrite when you come back later. Invoke manually with /warmcache when the current session has a large (>200K token) context you plan to resume within the next few hours and are about to leave idle. Never invoke this automatically or proactively — it must be an explicit user request."
 ---
 
-# Keep Cache Warm
+# Warm Cache
 
 ## Why this exists
 
@@ -30,7 +30,7 @@ Only run this when all of the following hold:
 Do not invoke this speculatively, automatically, or "just in case." Every
 ping has a small real cost, and that cost is wasted if the session is never
 resumed. This skill only ever runs because the user explicitly typed
-`/keep-cache-warm`.
+`/warmcache`.
 
 ## How to run it
 
@@ -42,12 +42,12 @@ This skill is invoked two ways: a fresh start (typed by the user) and a
 
 1. Default to interval=55 (minutes) and max_pings=4 (~3h40m total, matching
    the "up to 4 hours" budget). If the user passed
-   `/keep-cache-warm <interval_minutes> <max_pings>`, use those instead.
+   `/warmcache <interval_minutes> <max_pings>`, use those instead.
 2. Reply with one short line: how often it will ping, how many pings, the
    total window, and that it can be cancelled (see "Stopping early").
 3. Call `send_later` (claude-code-remote MCP server) with
    `delay_minutes=<interval>` and
-   `message="/keep-cache-warm continue 1 <interval> <max_pings>"`.
+   `message="/warmcache continue 1 <interval> <max_pings>"`.
 4. Stop. Don't do anything else — just wait for the scheduled message.
 
 ### Continue — `args` starts with `continue`
@@ -58,7 +58,7 @@ Args are `continue <n> <interval> <max_pings>`.
    touch the cached context so the hit resets the TTL — keep output to an
    absolute minimum to keep the ping cheap.
 2. If `n < max_pings`: call `send_later` with `delay_minutes=<interval>` and
-   `message="/keep-cache-warm continue <n+1> <interval> <max_pings>"`.
+   `message="/warmcache continue <n+1> <interval> <max_pings>"`.
 3. If `n >= max_pings`: add one short line noting the keep-warm window has
    ended and no more pings are scheduled. Do not call `send_later` again.
 
@@ -66,7 +66,7 @@ Args are `continue <n> <interval> <max_pings>`.
 
 If the user asks to cancel the keep-warm loop before it finishes: call
 `list_triggers`, find the pending one-shot Routine whose prompt starts with
-`/keep-cache-warm continue`, and `delete_trigger` it. Confirm the
+`/warmcache continue`, and `delete_trigger` it. Confirm the
 cancellation to the user.
 
 ## Caveats
